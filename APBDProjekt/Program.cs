@@ -1,4 +1,6 @@
 using APBDProjekt.Data;
+using APBDProjekt.Services;
+using APBDProjekt.Tools;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IClientService,ClientService>();
+builder.Services.AddScoped<IUmowaService,UmowaService>();
+builder.Services.AddScoped<IPrzychodService,PrzychodService>();
+builder.Services.AddScoped<IWalutaProcessor,WalutaProcessor>();
 builder.Services.AddDbContext<Context>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );

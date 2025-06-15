@@ -15,7 +15,8 @@ public abstract class Client
     [MaxLength(100)]
     public required string Email { get; set; }
     [Required]
-    [MinLength(9, ErrorMessage = "Phone number must be 9 digits")]
-    [MaxLength(9, ErrorMessage = "Phone number must be 9 digits")]
+    [MinLength(9, ErrorMessage = "Numer telefonu musi mieć 9 cyfr")] 
     public required string PhoneNumber { get; set; }
+    public ICollection<Licencja> Licencje { get; set; }
+    public ICollection<Platnosc> Platnosci { get; set; }
 }

@@ -13,14 +13,14 @@ public class Oprogramowanie
     [MaxLength(50)]
     public required string Nazwa { get; set; }
     [Required]
-    [DataType("numeric")]
-    [Precision(10, 2)]
-    public double CenaZaRok { get; set; }
+    [Column(TypeName = "decimal(10,2)")]
+    public decimal CenaZaRok { get; set; }
     [Required]
     [MaxLength(100)]
     public required string InfoOWersji { get; set; }
     [Required]
     [MaxLength(50)]
     public required string Kategoria { get; set; }
+    public ICollection<Licencja> Licencje { get; set; }
     public ICollection<Znizka> Znizki { get; set; }
 }

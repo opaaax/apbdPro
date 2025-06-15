@@ -10,6 +10,6 @@ public class Firma : Client
     [MaxLength(50)]
     public required string Nazwa { get; set; }
     [Required]
-    [MaxLength(50)]
+    [MaxLength(10)]
     public required string Krs { get; init; }
 }
