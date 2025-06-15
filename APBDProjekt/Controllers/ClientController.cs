@@ -1,6 +1,7 @@
 ﻿using APBDProjekt.DTOs;
 using APBDProjekt.Exceptions;
 using APBDProjekt.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace APBDProjekt.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "User, Admin")]
 public class ClientController : ControllerBase
 {
     private readonly IClientService _clientService;
@@ -22,7 +24,9 @@ public class ClientController : ControllerBase
     {
         return Ok(await _clientService.GetAllClientsAsync());
     }
-
+    
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddClientAsync(AddClientDto client)
     {
         try
@@ -35,7 +39,8 @@ public class ClientController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-
+    [HttpDelete]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteClientAsync(int id)
     {
         try
@@ -58,6 +63,8 @@ public class ClientController : ControllerBase
         
     }
 
+    [HttpPut]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateClientAsync(int id, UpdateClientDto client)
     {
         try

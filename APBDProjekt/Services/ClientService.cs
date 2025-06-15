@@ -66,7 +66,7 @@ public class ClientService : IClientService
 
         if (firma != null)
         {
-            throw new BadRequestException("Cannot delete a company.");
+            throw new BadRequestException("Nie można usunąć firmy");
         }
         
         var osobaFizyczna = await _context.OsobaFizyczne.FirstOrDefaultAsync(f => f.Id == id);

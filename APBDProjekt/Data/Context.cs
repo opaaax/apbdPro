@@ -1,9 +1,11 @@
 ﻿using APBDProjekt.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace APBDProjekt.Data;
 
-public class Context : DbContext
+public class Context : IdentityDbContext<IdentityUser>
 {
     public DbSet<Firma> Firmy { get; set; }
     public DbSet<Client> Clients { get; set; }
@@ -24,5 +26,22 @@ public class Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder); 
+
+        modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+        {
+            entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+        });
+
+        modelBuilder.Entity<IdentityUserRole<string>>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.RoleId });
+        });
+
+        modelBuilder.Entity<IdentityUserToken<string>>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+        });
+
     }
 }

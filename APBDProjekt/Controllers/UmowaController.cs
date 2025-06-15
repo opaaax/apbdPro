@@ -2,12 +2,14 @@
 using APBDProjekt.DTOs;
 using APBDProjekt.Exceptions;
 using APBDProjekt.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APBDProjekt.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "User, Admin")]
 public class UmowaController : ControllerBase
 {
     private readonly IUmowaService _umowaService;
